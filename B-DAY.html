@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthday</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #fdf6f0;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: #ffe4e1;
+    }
+
+    .birthday-title {
+      font-size: 3.5rem;
+      font-family: 'Brush Script MT', cursive;
+      background: linear-gradient(90deg, #ff69b4, #ffb6c1, #ff69b4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 3s infinite;
+      text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.3);
+      margin: 0;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% }
+      100% { background-position: 200% }
+    }
+
+    .countdown {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-top: 1rem;
+      color: #ff69b4;
+    }
+
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 2rem;
+    }
+
+    .photo {
+      position: relative;
+      width: 250px;
+      height: 250px;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .photo:hover img {
+      transform: scale(1.05);
+    }
+
+    .caption {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .photo:hover .caption {
+      opacity: 1;
+    }
+
+    .video-section {
+      text-align: center;
+      padding: 2rem;
+    }
+
+    iframe {
+      width: 80%;
+      max-width: 600px;
+      height: 350px;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .timeline {
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+      text-align: left;
+    }
+
+    .flowchart {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .moment-box {
+      background: #fff0f5;
+      border: 2px solid #ff69b4;
+      border-radius: 10px;
+      padding: 1rem 2rem;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .moment-text {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .moment-date {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .arrow {
+      font-size: 1.5rem;
+      color: #ff69b4;
+    }
+
+    .letter-container {
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .birthday-video {
+  width: 100%;
+  height: auto;
+}
+    .ribbon {
+      background: #ff69b4;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: inline-block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .letter {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      background: #fff0f5;
+      border: 2px dashed #ca51b4;
+      border-radius: 10px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-style: italic;
+    }
+    .sparkles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: url('https://i.imgur.com/8fK4h6F.png') repeat;
+      animation: sparkleMove 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes sparkleMove {
+      from { background-position: 0 0; }
+      to { background-position: 1000px 1000px; }
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100vh) scale(1.5); opacity: 0; }
+    }
+
+    .heart {
+    
+      bottom: -50px;
+      font-size: 2rem;
+      animation: floatUp 8s ease-in infinite;
+      color: #ff69b4;
+      z-index: 1;
+    }
+
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 30%; animation-delay: 2s; }
+    .heart:nth-child(3) { left: 50%; animation-delay: 4s; }
+    .heart:nth-child(4) { left: 70%; animation-delay: 6s; }
+    .heart:nth-child(5) { left: 90%; animation-delay: 8s; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    .heart {
+  position: absolute;
+  bottom: -50px;
+  font-size: 2rem;
+  animation: floatUp 8s ease-in forwards;
+  color: #ff69b4;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-100vh); opacity: 0; }
+}
+    .fade-in {
+      animation: fadeIn 1.5s ease-out forwards;
+    }
+    .letter-part {
+  display: none;
+  margin-top: 1rem;
+  padding: 1.5rem;
+  background: #fff0f5;
+  border: 2px dashed #ff69b4;
+  border-radius: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-style: italic;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1 class="birthday-title">🎉 Happy Birthday, Nana💖</h1>
+  </header>
+
+  <div class="countdown">
+    Time until your birthday: <span id="countdown"></span>
+  </div>
+
+  <div style="text-align: center; margin-top: 2rem;">
+    <button id="revealButton" style="display: none;" class="ribbon">🎁 Open Your Birthday Surprise</button>
+  </div>
+
+  <div id="birthdayContent" style="display: none;">
+    <div class="gallery">
+      <div class="photo">
+        <img src="your-photo1.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo2.jpg" alt="Moment 2"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo5.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo3.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo4.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo6.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo7.jpg" alt="Moment 1"/>
+      </div>
+      <div class="photo">
+        <img src="your-photo8.jpg" alt="Moment 1"/>
+      </div>
+    </div>
+
+    <div class="video-section">
+      <h2>Special Memories 🎥</h2>
+      <iframe src="your-video1.mp4" allowfullscreen width="465" height="832"></iframe>
+    </div>
+
+    <div class="timeline">
+      <h2 style="text-align:center;">ONE YEAR TO BE WITH YOU ❤️😘🫂</h2>
+      <div class="flowchart">
+        <div class="moment-box">
+          <div class="moment-text">YOU PROPOSED ME 😚🥰.</div>
+          <div class="moment-date">📅 November-18-2024 </div>
+        </div>
+        <div class="arrow">⬇️</div>
+        <div class="moment-box">
+          <div class="moment-text"> Our first long call 📞😝.</div>
+          <div class="moment-date">📅 November-19-2024 </div>
+        </div>
+        <div class="arrow">⬇️</div>
+        <div class="moment-box">
+          <div class="moment-text"> I Said YESS!!💕🫂❤️ </div>
+          <div>I LOVE YOU NANA💖🫂😘</div>
+          <div class="moment-date"> December-5-2024 </div>
+        </div>
+      </div>
+       <h2 style="text-align:center;">OUR STORY GOES ON ❤️🧑🏻‍❤️‍👩🏻🫂</h2>
+    </div>
+<div class="letter-container">
+  <div class="ribbon" onclick="toggleLetter()">🎀 Open Your Birthday Letter</div>
+  <div class="letter" id="loveLetter">
+        Nana💖,<br><br>
+        On this special day, I find myself thinking about everything we’ve been through together in the last year. Our journey hasn’t always been perfect, and sometimes we’ve hurt each other or made mistakes. There were times when I felt hurt or even cried, but what matters most is that you were the one who came back to me and tried to make things right.<br><br>
+        You’ve always stood by my side when I truly needed someone. Even when I didn’t know how to ask for help or comfort, you somehow understood and gave me exactly what my heart longed for—sometimes the little things I’d wanted for days, you were the only one who noticed and cared enough to make them happen without me asking.<br><br>
+        Being with you has made this past year unforgettable. You have taught me not just about love, but about patience, forgiveness, and kindness. Thank you for hearing me, even when I didn’t always say things perfectly. Thank you for trying, for caring, and for staying beside me through every up and down.<br><br>
+        I hope this birthday brings you as much happiness as you’ve brought into my life. May we continue growing, learning, and making beautiful memories together. I’m grateful for every moment with you and excited for whatever the future holds for us.<br><br>
+        From the moment we met, my world changed forever. Every laugh, every cry, every e-kiss and every e-hug — I cherish them all. You are my heart, my home, my everything.<br><br>
+        Happy Birthday, my man. Here's to many more memories together.<br><br>
+        Forever yours,<br>
+        Pellam 💖
+      </div>
+    </div>
+  
+
+  <!-- Background Music -->
+  <audio autoplay loop>
+    <source src="your-music.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <!-- Reveal Sound Effect -->
+  <audio id="revealSound">
+    <source src="your-reveal-sound.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+
+  <script>
+    const countdownElement = document.getElementById("countdown");
+    const targetDate = new Date("2025-10-16T00:00:00");
+    const revealButton = document.getElementById("revealButton");
+    const birthdayContent = document.getElementById("birthdayContent");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        countdownElement.textContent = "🎉 It's your birthday!";
+        revealButton.style.display = "inline-block";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+      countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    revealButton.addEventListener("click", () => {
+      birthdayContent.classList.add("fade-in");
+      birthdayContent.style.display = "block";
+      revealButton.style.display = "none";
+
+      const sound = document.getElementById("revealSound");
+      sound.play();
+    });
+    const heartEmojis = ["💖","💗","🫂","💞","💕"];
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+
+  // Random horizontal position
+  heart.style.left = Math.random() * 100 + "%";
+
+  // Random size
+  heart.style.fontSize = (Math.random() * 2 + 1) + "rem";
+
+  // Random animation duration
+  heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+
+  document.body.appendChild(heart);
+
+  // Remove after animation ends
+  setTimeout(() => heart.remove(), 10000);
+}
+
+// Spawn a new heart every second
+setInterval(createHeart, 1000);
+    function toggleLetter() {
+      const letter = document.getElementById("loveLetter");
+      letter.style.display = letter.style.display === "block" ? "none" : "block";
+    }
+function revealLetter() {
+  const parts = document.querySelectorAll(".letter-part");
+  parts.forEach(part => {
+    part.style.display = "block";
+  });
+}
+  </script>
+</body>
+</html>
